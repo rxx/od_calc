@@ -1,0 +1,12 @@
+hidden = [
+    '.config',
+    'pnpm-lock.json',
+]
+modules = [ 'nodejs-20:v32-20240401-269b323'
+]
+run = 'pnpm run dev'
+
+[nix]
+channel = 'stable-23_11'
+
+

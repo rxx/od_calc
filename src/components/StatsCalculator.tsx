@@ -14,7 +14,7 @@ function StatsCalculator() {
       />
 
       <button
-        className="w-full mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+        className="w-full mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 bt-4"
       >
         Calculate
       </button>

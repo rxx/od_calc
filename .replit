@@ -9,4 +9,9 @@ run = 'pnpm run dev'
 [nix]
 channel = 'stable-23_11'
 
+[[ports]]
+localPort = 4321
+externalPort = 80
+exposeLocalhost = true
+
 

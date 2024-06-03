@@ -19,15 +19,14 @@ const BuildingsStats: React.FC<BuildingsProps> = ({ stats }) => {
 
   return (
     <div className="text-white bg-gray-800 shadow-md rounded px-1 pt-1 pb-1 mb-4">
-      <h3 className="mb-2">Constructed Buildings <span>Barren Land: 0 (0.00%)</span></h3>
+      <h3 className="mb-2">Buildings</h3>
       <div className="flex flex-col">
         <div className="flex text-left font-bold uppercase text-xs px-1 py-2">
           <div className="w-1/3">Building Type</div>
           <div className="w-1/3 text-center">Constructed</div>
           <div className="w-1/3 text-center">With Incoming</div>
         </div>
-
-        {buildingNames.map(buildingName => {
+{buildingNames.map(buildingName => {
           const constructed = buildingsData[buildingName];
           const percentage = ((constructed / totalConstructed) * 100).toFixed(2);
 

@@ -5,6 +5,8 @@ interface InfoStatsProps {
     status: {
        ruler_name: string,
        race_name: string,
+       name: string,
+       realm: number,
     };
   };
 }

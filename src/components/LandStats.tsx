@@ -25,7 +25,7 @@ const LandStats: React.FC<LandStatsProps> = ({ stats }) => {
 
   return (
     <div className="text-white bg-gray-800 shadow-md rounded px-1 pt-1 pb-1 mb-4">
-      <h3 className="mb-2">Land Overview</h3>
+      <h3 className="mb-2">Land</h3>
 
       <div className="flex flex-col">
         <div className="flex text-left font-bold uppercase text-xs px-1 py-2">
@@ -37,13 +37,12 @@ const LandStats: React.FC<LandStatsProps> = ({ stats }) => {
 
         {landTypes.map(landType => {
           const landInfo = landData[landType];
-          const barrenPercentage = ((landInfo.barren / totalLand) * 100).toFixed(2);
           const totalPercentage = ((landInfo.amount / totalLand) * 100).toFixed(2);
 
           return (
             <div key={landType} className="flex border-b text-left text-sm px-1 py-1">
-              <div className="w-1/4">{landType === 'plain' ? `${landType} (home)` : landType}</div>
-              <div className="w-1/4 text-center">{landInfo.barren} ({barrenPercentage}%)</div>
+              <div className="w-1/4">{landType}</div>
+              <div className="w-1/4 text-center">{landInfo.barren}</div>
               <div className="w-1/4 text-center">{landInfo.amount} ({totalPercentage}%)</div>
               <div className="w-1/4 text-center">{landInfo.amount} ({totalPercentage}%)</div>
             </div>

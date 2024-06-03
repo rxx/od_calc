@@ -1,4 +1,3 @@
-import React from 'react';
 import useStats from "../hooks/useStats";
 
 import BuildingsStats from "./BuildingsStats";
@@ -11,27 +10,28 @@ function StatsCalculator() {
   return (
     <>
       <div className="flex flex-row gap-1">
-      <textarea
-        value={jsonStats}
-        onChange={(e) => setJsonStats(e.target.value)}
-        className="h-10 w-10 p-2 bg-gray-800 text-white rounded-md resize-none" 
-      />
+        <textarea
+          value={jsonStats}
+          onChange={(e) => setJsonStats(e.target.value)}
+          className="h-10 w-10 resize-none rounded-md bg-gray-800 p-2 text-white"
+        />
 
-      <button onClick={() => setJsonStats('')}
-        className="h-10 w-10 mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 bt-4"
-      >
-        Clear
-      </button>
-    </div>
+        <button onClick={() => setJsonStats('')}
+          className="bt-4 mt-2 h-10 w-10 rounded-md bg-blue-600 px-4 py-2
+          text-white hover:bg-blue-700"
+        >
+          Clear
+        </button>
+      </div>
       {stats && (
         <>
           <InfoStats stats={stats} />
-          
+
           <BuildingsStats stats={stats} />
-      
+
           <LandStats stats={stats} />
         </>
-        )}
+      )}
     </>
   );
 }

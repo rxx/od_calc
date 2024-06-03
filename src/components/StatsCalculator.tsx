@@ -1,25 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
+import useStats from "../hooks/useStats";
+
 import BuildingsStats from "./BuildingsStats";
+import LandStats from "./LandStats";
+import InfoStats from "./InfoStats";
 
 function StatsCalculator() {
-  const [jsonData, setJsonData] = useState('');
-
+  const [jsonStats, setJsonStats, stats] = useStats();
 
   return (
     <>
       <textarea
-        value={jsonData}
-        onChange={(e) => setJsonData(e.target.value)}
-        className="w-full h-40 p-2 bg-gray-800 text-white rounded-md resize-none" 
+        value={jsonStats}
+        onChange={(e) => setJsonStats(e.target.value)}
+        className="h-10 w-10 p-2 bg-gray-800 text-white rounded-md resize-none" 
       />
 
-      <button
-        className="w-full mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 bt-4"
+      <button onClick={setJsonStats('')}
+        className="h-10 w-10 mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 bt-4"
       >
-        Calculate
+        Clear
       </button>
       
-      {jsonData && <BuildingsStats client:load jsonData={jsonData} />}
+      {stats && (
+        <>
+          <InfoStats client:visible stats={stats} />
+          
+          <BuildingsStats client:visible stats={stats} />
+      
+          <LandStats client:visible stats={stats} />
+        </>
+        )}
     </>
   );
 }

@@ -3,16 +3,21 @@ import React from 'react';
 interface LandStatsProps {
   stats: {
     land: {
-      totalLand: number;
-      totalBarrenLand: number;
+      totalLand: number,
+      totalBarrenLand: number,
       explored: { 
         [landType: string]: { 
             amount: number;
             barren:number 
           }
-        };
-    };
-  };
+        },
+        incoming: {
+          [landType: string]: {
+            [hour: string]: number
+          }
+        },
+    },
+  },
 }
 
 const LandStats: React.FC<LandStatsProps> = ({ stats }) => {

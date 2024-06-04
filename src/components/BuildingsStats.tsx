@@ -5,6 +5,11 @@ interface BuildingsProps {
     survey: {
       constructed: {
         [buildingName: string]: number
+      },
+      constructing: {
+        [buildingName: string]: {
+            [hour: string]: number
+          }
       }
     }
   }

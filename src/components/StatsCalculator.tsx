@@ -9,7 +9,7 @@ function StatsCalculator() {
 
   return (
     <>
-      <div className="flex flex-row gap-1">
+      <div className="flex flex-row gap-1 transition:persist">
         <textarea
           value={jsonStats}
           onChange={(e) => setJsonStats(e.target.value)}

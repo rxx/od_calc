@@ -1,11 +1,12 @@
 import { useStore } from '@nanostores/react';
 import { $stats } from '../store/stats';
 import { useState } from 'react';
+import { parseJSON } from '../utils'
 
 function JsonArea() {
   const stats = useStore($stats);
   const name: string = stats?.status?.name || 'dominion name'
-  const [inputVisible, setVisibility] = useState(!name);
+  const [inputVisible, setVisibility] = useState(!stats?.status);
 
   const setStats = (json: string) => {
     if (!json) {
@@ -13,12 +14,10 @@ function JsonArea() {
       setVisibility(true);
     }
 
-    try {
-      const parsedData = JSON.parse(json);
+    const parsedData = parseJSON(json);
+    if (parsedData) {
       setVisibility(false);
       $stats.set(parsedData);
-    } catch (err) {
-      console.error("Error on parsing json:", err);
     }
   }
 

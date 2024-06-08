@@ -1,8 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import StatsCalculator from '../components/StatsCalculator';
+import JsonArea from '../components/JsonArea'
+import InfoStats from '../components/InfoStats'
+import LandStats from '../components/LandStats'
+import BuildingsStats from '../components/BuildingsStats'
 ---
-	<Layout title="Game Stats">
-      <StatsCalculator client:load />
-	</Layout>
+<Layout title="Game Stats">
+	<JsonArea client:load transition:persist/>
+	<hr class="my-3" />
+	<InfoStats client:load />
+	<LandStats client:load />
+	<BuildingsStats client:load />
+</Layout>
 	

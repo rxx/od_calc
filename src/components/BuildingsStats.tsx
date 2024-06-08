@@ -1,42 +1,43 @@
-import React from 'react';
+import { useStore } from '@nanostores/react';
+import { $stats } from '../store/stats';
 
 interface BuildingsProps {
-  stats: {
-    survey: {
-      constructed: {
-        [buildingName: string]: number
-      },
-      constructing: {
-        [buildingName: string]: {
-            [hour: string]: number
-          }
+  survey: {
+    constructed: {
+      [buildingName: string]: number
+    },
+    constructing: {
+      [buildingName: string]: {
+        [hour: string]: number
       }
     }
   }
 }
 
-const BuildingsStats: React.FC<BuildingsProps> = ({ stats }) => {
+const BuildingsStats = () => {
+  const stats = useStore($stats) as BuildingsProps;
+  if (!stats?.survey) { return null }
+
   let buildingsData = stats.survey.constructed;
 
   const totalConstructed = Object.values(buildingsData).reduce((sum, val) => sum + val, 0);
-
   const buildingNames = Object.keys(buildingsData);
 
   return (
-    <div className="text-white bg-gray-800 shadow-md rounded px-1 pt-1 pb-1 mb-4">
+    <div className="mb-4 rounded bg-gray-800 px-1 pb-1 pt-1 text-white shadow-md">
       <h3 className="mb-2">Buildings</h3>
       <div className="flex flex-col">
-        <div className="flex text-left font-bold uppercase text-xs px-1 py-2">
+        <div className="flex px-1 py-2 text-left text-xs font-bold uppercase">
           <div className="w-1/3">Building Type</div>
           <div className="w-1/3 text-center">Constructed</div>
           <div className="w-1/3 text-center">With Incoming</div>
         </div>
-{buildingNames.map(buildingName => {
+        {buildingNames.map(buildingName => {
           const constructed = buildingsData[buildingName];
           const percentage = ((constructed / totalConstructed) * 100).toFixed(2);
 
           return (
-            <div key={buildingName} className="flex border-b text-left text-sm px-1 py-1">
+            <div key={buildingName} className="flex border-b px-1 py-1 text-left text-sm">
               <div className="w-1/3">{buildingName}</div>
               <div className="w-1/3 text-center">{constructed} ({percentage}%)</div>
               <div className="w-1/3 text-center">{constructed} ({percentage}%)</div>
@@ -44,7 +45,7 @@ const BuildingsStats: React.FC<BuildingsProps> = ({ stats }) => {
           );
         })}
 
-        <div className="flex bg-gray-900 text-left font-bold text-sm px-1 py-1">
+        <div className="flex bg-gray-900 px-1 py-1 text-left text-sm font-bold">
           <div className="w-1/3">Total</div>
           <div className="w-1/3 text-center">{totalConstructed} (100.00%)</div>
           <div className="w-1/3 text-center">{totalConstructed} (100.00%)</div>

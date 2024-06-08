@@ -1,23 +1,48 @@
-
-
+import { useStore } from '@nanostores/react';
+import { $stats } from '../store/stats';
+import { useState } from 'react';
 
 function JsonArea() {
+  const stats = useStore($stats);
+  const name: string = stats?.status?.name || ''
+  const [jsonValue, setValue] = useState('')
+
+  const setStats = (json: string) => {
+    setValue(json);
+
+    if (!json) {
+      $stats.set(null);
+    }
+
+    if (json) {
+      try {
+        const parsedData = JSON.parse(json);
+        $stats.set(parsedData);
+      } catch (err) {
+        console.error("Error on parsing json:", err);
+      }
+    }
+  }
+
   return (
-  <>
-    <div className="flex flex-row gap-1 transition:persist">
+    <>
+      <div className="mb-2 w-40 bg-gray-800 text-white">{name}</div>
+      <div className="flex flex-row gap-3">
         <textarea
-          value={jsonStats}
-          onChange={(e) => setJsonStats(e.target.value)}
-          className="h-10 w-10 resize-none rounded-md bg-gray-800 p-2 text-white"
+          value={jsonValue}
+          onChange={(e) => setStats(e.target.value)}
+          className="h-10 w-20 resize-none rounded-md bg-gray-800 p-2 text-white"
         />
 
-        <button onClick={() => setJsonStats('')}
-          className="bt-4 mt-2 h-10 w-10 rounded-md bg-blue-600 px-4 py-2
-          text-white hover:bg-blue-700"
+        <button onClick={() => setStats('')}
+          className="h-10 w-20 rounded-md bg-gray-600 
+          text-white hover:bg-gray-700"
         >
           Clear
         </button>
       </div>
-  </>
+    </>
   )
 }
+
+export default JsonArea;

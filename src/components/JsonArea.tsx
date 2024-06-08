@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 function JsonArea() {
   const stats = useStore($stats);
-  const name: string = stats?.status?.name || ''
+  const name: string = stats?.status?.name || 'dominion name'
   const [jsonValue, setValue] = useState('')
 
   const setStats = (json: string) => {
@@ -25,23 +25,22 @@ function JsonArea() {
   }
 
   return (
-    <>
-      <div className="mb-2 w-40 bg-gray-800 text-white">{name}</div>
-      <div className="flex flex-row gap-3">
-        <textarea
-          value={jsonValue}
-          onChange={(e) => setStats(e.target.value)}
-          className="h-10 w-20 resize-none rounded-md bg-gray-800 p-2 text-white"
-        />
-
-        <button onClick={() => setStats('')}
-          className="h-10 w-20 rounded-md bg-gray-600 
-          text-white hover:bg-gray-700"
-        >
-          Clear
-        </button>
+    <div className="grid grid-cols-2 gap-2">
+      <div className="col-span-full rounded-md bg-gray-800 p-2 text-center
+        align-middle font-bold capitalize text-indigo-400 shadow-md">
+        {name}
       </div>
-    </>
+      <textarea className="h-10 rounded-md bg-gray-800 p-2 text-white"
+        value={jsonValue} placeholder="Put ops here" spellCheck="false"
+        onChange={(e) => setStats(e.target.value)}
+      />
+
+      <button className="h-10 rounded-md bg-gray-600 text-white
+          hover:bg-gray-700" onClick={() => setStats('')}
+      >
+        Clear
+      </button>
+    </div>
   )
 }
 

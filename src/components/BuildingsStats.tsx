@@ -1,27 +1,11 @@
 import { useStore } from '@nanostores/react';
 import { $stats } from '../store/stats';
 
-interface BuildingsProps {
-  survey: {
-    constructed: {
-      [buildingName: string]: number
-    },
-    constructing: {
-      [buildingName: string]: {
-        [hour: string]: number
-      }
-    }
-  }
-}
-
 const BuildingsStats = () => {
-  const stats = useStore($stats) as BuildingsProps;
+  const stats = useStore($stats);
   if (!stats?.survey) { return null }
 
-  let buildingsData = stats.survey.constructed;
-
-  const totalConstructed = Object.values(buildingsData).reduce((sum, val) => sum + val, 0);
-  const buildingNames = Object.keys(buildingsData);
+  const buildings = stats.survey;
 
   return (
     <div className="mb-4 rounded bg-gray-800 px-1 pb-1 pt-1 text-white shadow-md">
@@ -32,7 +16,7 @@ const BuildingsStats = () => {
           <div className="w-1/3 text-center">Constructed</div>
           <div className="w-1/3 text-center">With Incoming</div>
         </div>
-        {buildingNames.map(buildingName => {
+        {buildins.map(buildingName => {
           const constructed = buildingsData[buildingName];
           const percentage = ((constructed / totalConstructed) * 100).toFixed(2);
 

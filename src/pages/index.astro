@@ -1,13 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import JsonArea from '../components/JsonArea'
-import LandStats from '../components/LandStats'
-import BuildingsStats from '../components/BuildingsStats'
+import Layout from '../layouts/Layout.astro';
+import JsonArea from '../components/JsonArea';
+import BuildingsStats from '../components/BuildingsStats';
 ---
 <Layout title="Game Stats">
 	<JsonArea client:load transition:persist/>
 	<div class="my-2" />
-	<LandStats client:load />
 	<BuildingsStats client:load />
 </Layout>
 	

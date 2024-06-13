@@ -24,8 +24,8 @@ swamp:
   races:
     - nox
     - spirit
-    - undead vampire
-    - undead zombie
+    - vampire
+    - undead
 cavern:
   buildings:
     - diamond mine
